@@ -1,1 +1,1 @@
-# 2025 Analysis Json Cpp
+# Analiza jsoncpp projekta
