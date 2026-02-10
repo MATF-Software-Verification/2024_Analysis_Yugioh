@@ -1,0 +1,22 @@
+# Build artifacts
+build/
+bin/
+lib/
+unit_tests/build/
+unit_tests/coverage_report/
+unit_tests/reports/
+
+# Coverage data
+*.gcda
+*.gcno
+*.info
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db

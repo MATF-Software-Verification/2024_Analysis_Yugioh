@@ -1,39 +1,19 @@
 # Analiza jsoncpp projekta
 
-## O projektu koji se analizira
+## Informacije o autoru
+- **Ime i prezime:** Marko Bura
+- **Broj indeksa:** 1040/2024
 
-### Šta je jsoncpp?
+## O projektu
+**jsoncpp** je C++ biblioteka za rad sa JSON podacima (serijalizacija i deserijalizacija).
+- **Izvorni kod:** [jsoncpp](https://github.com/open-source-parsers/jsoncpp)
+- **Analizirana verzija (commit):** `b511d9e64956db998b74909df112ac8c8f41d6ff`
 
-**jsoncpp** je C++ biblioteka otvorenog koda koja omogućava rad sa JSON podacima.
+## Korišćeni alati
+1. **Testovi i pokrivenost koda (gcov/lcov)**
+   - Alat se koristi za pokretanje postojećih i novih testova, uz merenje procenta izvršenog koda.
+   - **Instrukcije:** Pokrenuti skriptu `./unit_tests/run_tests.sh`. Izveštaji će biti generisani u `unit_tests/reports/`.
 
-### Osnovne karakteristike jsoncpp biblioteke
-
-- **Serializacija i deserializacija**: Biblioteka omogućava konverziju JSON podataka iz string formata u C++ objekte (deserializacija) i obrnuto (serializacija)
-- **Čuvanje komentara**: Jedna od posebnih karakteristika je mogućnost čuvanja komentara tokom procesa serializacije/deserializacije, što čini format pogodnim za čuvanje konfiguracionih fajlova
-- **C++11 standard**: Biblioteka je napisana koristeći C++11 standard
-- **Cross-platform**: Radi na različitim platformama (Linux, Windows, macOS)
-- **MIT licenca**: Biblioteka je dostupna pod MIT licencom ili public domain
-
-### Informacije o verziji
-
-- **Repozitorijum**: https://github.com/open-source-parsers/jsoncpp.git
-- **Verzija**: 1.9.7
-- **Commit hash**: `b511d9e64956db998b74909df112ac8c8f41d6ff`
-- **Build sistem**: CMake (takođe podržava Meson i Bazel)
-- **Jezik**: C++11
-
-### Struktura projekta
-
-- `src/lib_json/` - Glavna biblioteka sa implementacijom JSON parsera i writer-a
-- `include/json/` - Header fajlovi sa API-jem biblioteke
-- `src/test_lib_json/` - Jedinični testovi
-- `test/` - Test podaci i integracioni testovi
-- `example/` - Primeri korišćenja biblioteke
-
-### Osnovna upotreba
-
-jsoncpp se koristi u mnogim C++ projektima kada je potrebno:
-- Parsiranje JSON fajlova ili stringova
-- Generisanje JSON iz C++ objekata
-- Rad sa konfiguracionim fajlovima u JSON formatu
-- API komunikacija koja koristi JSON format
+## Zaključci
+- Biblioteka `jsoncpp` ima veoma visoku pokrivenost koda originalnim testovima (preko 95%).
+- Dodavanjem ciljanih testova za *move* semantiku i specifične konfiguracije parsera, pokrivenost je uspešno povećana, što potvrđuje modularnost koda.
