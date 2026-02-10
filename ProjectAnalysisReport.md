@@ -20,3 +20,31 @@ Prvi korak analize bio je utvrđivanje trenutnog stanja testova unutar `jsoncpp`
 
 ### Zaključak
 Biblioteka je izuzetno dobro testirana. Većina nepokrivenog koda (preostalih ~4%) odnosi se na specifične sistemske greške (npr. neuspešna alokacija memorije) ili ekstremno retke slučajeve koji zahtevaju promenu build okruženja. Analiza je uspešno pokazala kako se ciljanim testiranjem može unaprediti čak i veoma stabilan projekat.
+
+## 2. Dinamička analiza memorije (Valgrind Memcheck)
+
+### Opis analize
+Nakon provere pokrivenosti koda, sprovedena je dinamička analiza memorije pomoću alata `Valgrind`, konkretno njegovog najpoznatijeg modula `Memcheck`. Cilj je bio utvrditi da li biblioteka `jsoncpp` uzrokuje curenje memorije (*memory leaks*), pristupa neinicijalizovanim vrednostima ili nevalidnim memorijskim adresama.
+
+### Proces rada
+1. Napravljen je direktorijum `valgrind_memcheck` koji sadrži skriptu `run_memcheck.sh`.
+2. Skripta pokreće glavni test program biblioteke unutar Valgrind okruženja:
+   - `jsoncpp_test` (kompletan set od 121 originalnog unit testa biblioteke)
+3. Parametri koji su korišćeni pri pokretanju su:
+   - `--leak-check=full` (detaljna provera curenja memorije)
+   - `--show-leak-kinds=all` (prikaz svih vrsta curenja: *definite*, *indirect*, *possible*, *reachable*)
+   - `--track-origins=yes` (pomaže u pronalaženju uzroka korišćenja neinicijalizovane memorije)
+
+### Rezultati
+Analiza je pokazala da biblioteka `jsoncpp` u potpunosti poštuje pravila upravljanja memorijom u testiranim scenarijima.
+- **ERROR SUMMARY:** 0 errors from 0 contexts.
+- **Leak Summary:** Nije pronađeno nikakvo curenje memorije (0 bytes in 0 blocks are definitely lost).
+
+Ovi rezultati su posebno značajni jer su testovi uključivali i kompleksne operacije poput *deep nesting*-a (veliki broj alokacija na hipu) i *move* semantike (prenošenje vlasništva nad memorijom između objekata).
+
+### Zaključak
+Biblioteka `jsoncpp` je memorijski bezbedna i robusna. Implementacija *move* operatora je ispravna i ne ostavlja "siročiće" u memoriji (dangling pointers ili leaks). Ovo je čini pogodnom za upotrebu u kritičnim C++ sistemima gde je stabilnost memorije od primarnog značaja.
+
+
+
+

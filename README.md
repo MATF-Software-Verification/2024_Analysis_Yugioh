@@ -13,6 +13,9 @@
 1. **Testovi i pokrivenost koda (gcov/lcov)**
    - Alat se koristi za pokretanje postojećih i novih testova, uz merenje procenta izvršenog koda.
    - **Instrukcije:** Pokrenuti skriptu `./unit_tests/run_tests.sh`. Izveštaji će biti generisani u `unit_tests/reports/`.
+2. **Valgrind (Memcheck)**
+   - Alat za dinamičku analizu memorije. Koristi se za pronalaženje curenja memorije i neispravnih pristupa memoriji.
+   - **Instrukcije:** Pokrenuti skriptu `./valgrind_memcheck/run_memcheck.sh`. Rezultat je sačuvan u `valgrind_memcheck/memcheck_out.txt`.
 
 ## Zaključci
 - Biblioteka `jsoncpp` ima veoma visoku pokrivenost koda originalnim testovima (preko 95%).
