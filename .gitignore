@@ -11,11 +11,12 @@ unit_tests/reports/
 *.gcno
 *.info
 
-# IDE files
+# IDE and Tool files
 .vscode/
 .idea/
 *.swp
 *.swo
+compile_commands.json
 
 # OS files
 .DS_Store

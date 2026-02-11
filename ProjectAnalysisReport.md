@@ -45,6 +45,27 @@ Ovi rezultati su posebno značajni jer su testovi uključivali i kompleksne oper
 ### Zaključak
 Biblioteka `jsoncpp` je memorijski bezbedna i robusna. Implementacija *move* operatora je ispravna i ne ostavlja "siročiće" u memoriji (dangling pointers ili leaks). Ovo je čini pogodnom za upotrebu u kritičnim C++ sistemima gde je stabilnost memorije od primarnog značaja.
 
+## 3. Statička analiza (Clang-Tidy)
+
+### Opis analize
+Treći alat korišćen u analizi je `Clang-Tidy`, moćan alat za statičku analizu koji detektuje stilske neusaglašenosti, korišćenje zastarelih konstrukcija jezika i potencijalne logičke greške (*bug-prone* kod). Za razliku od Valgrinda, `Clang-Tidy` ne pokreće kod, već analizira samo stablo izvornog koda.
+
+### Proces rada
+1. Generisana je baza kompajliranja (`compile_commands.json`) pomoću CMake-a kako bi alat imao uvid u sve parametre prevođenja.
+2. Napravljen je direktorijum `clang_tidy` sa skriptom `run_clang_tidy.sh`.
+3. Analiza je pokrenuta nad svim izvornim fajlovima u `src/lib_json/` folderu, koristeći konfiguracioni fajl `.clang-tidy` koji je već bio prisutan u projektu.
+4. Rezultati su filtrirani kako bi se uklonila upozorenja iz sistemskih zaglavlja i fokusiralo se isključivo na implementaciju biblioteke.
+
+### Rezultati
+Analiza je generisala veliki broj nalaza, što je i očekivano za projekat ove veličine. Najznačajnije kategorije su:
+- **`modernize-*`**: Veliki broj sugestija za prelazak na modernije C++ konstrukcije (npr. *trailing return types*).
+- **`readability-braces-around-statements`**: Identifikovano je preko 160 mesta gde nedostaju vitičaste zagrade u `if` ili `while` blokovima, što je protivno Google-ovom stilu koda.
+- **`bugprone-branch-clone`**: Detektovano je 27 situacija gde su grane uslovnih prelaza identične, što može ukazivati na logičke greške nastale kopiranjem koda.
+- **`cppcoreguidelines-avoid-magic-numbers`**: Pronađeno je 65 "magičnih brojeva" koji bi trebali biti definisani kao imenovane konstante radi bolje čitljivosti.
+
+### Zaključak
+Iako je biblioteka `jsoncpp` funkcionalno veoma stabilna, `Clang-Tidy` je otkrio da postoji značajan prostor za unapređenje čitljivosti i modernizaciju koda. Posebno su zanimljivi nalazi iz kategorije `bugprone` koji bi u budućim verzijama mogli dovesti do suptilnih bagova. Korišćenje ovog alata je pokazalo da čak i zreli projekti profitiraju od redovne statičke analize.
+
 
 
 

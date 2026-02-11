@@ -16,7 +16,7 @@
 2. **Valgrind (Memcheck)**
    - Alat za dinamičku analizu memorije. Koristi se za pronalaženje curenja memorije i neispravnih pristupa memoriji.
    - **Instrukcije:** Pokrenuti skriptu `./valgrind_memcheck/run_memcheck.sh`. Rezultat je sačuvan u `valgrind_memcheck/memcheck_out.txt`.
+3. **Clang-Tidy**
+   - Alat za statičku analizu koda koji proverava usklađenost sa stilom i pronalazi potencijalne logičke greške.
+   - **Instrukcije:** Pokrenuti skriptu `./clang_tidy/run_clang_tidy.sh`. Izveštaj se nalazi u `clang_tidy/clang_tidy_report.txt`.
 
-## Zaključci
-- Biblioteka `jsoncpp` ima veoma visoku pokrivenost koda originalnim testovima (preko 95%).
-- Dodavanjem ciljanih testova za *move* semantiku i specifične konfiguracije parsera, pokrivenost je uspešno povećana, što potvrđuje modularnost koda.
