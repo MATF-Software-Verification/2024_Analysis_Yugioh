@@ -66,6 +66,28 @@ Analiza je generisala veliki broj nalaza, što je i očekivano za projekat ove v
 ### Zaključak
 Iako je biblioteka `jsoncpp` funkcionalno veoma stabilna, `Clang-Tidy` je otkrio da postoji značajan prostor za unapređenje čitljivosti i modernizaciju koda. Posebno su zanimljivi nalazi iz kategorije `bugprone` koji bi u budućim verzijama mogli dovesti do suptilnih bagova. Korišćenje ovog alata je pokazalo da čak i zreli projekti profitiraju od redovne statičke analize.
 
+## 4. Dodatna statička analiza (Cppcheck)
+
+### Opis analize
+Četvrti alat u okviru seminarskog rada je `Cppcheck`. Za razliku od prethodno korišćenog `Clang-Tidy` alata koji je delom usmeren na stil koda, `Cppcheck` je alat koji je primarno fokusiran na pronalaženje stvarnih bagova, nedefinisanog ponašanja (*undefined behavior*) i opasnih programerskih konstrukcija. Ovaj alat nije bio obrađivan na redovnim vežbama iz predmeta.
+
+### Proces rada
+1. Napravljen je direktorijum `cppcheck` sa skriptom `run_cppcheck.sh`.
+2. Analiza je konfigurisana da koristi C++11 standard i da uključi putanje do svih zaglavlja biblioteke.
+3. Korišćen je parametar `--enable=all` kako bi se obuhvatile sve kategorije provera (warnings, performance, portability, style).
+4. Parametar `--inconclusive` je korišćen za detekciju potencijalnih grešaka koje zahtevaju dodatnu ljudsku proveru.
+5. Analiza je izvršena nad celokupnim izvornim kodom u folderu `src/lib_json/`.
+
+### Rezultati
+`Cppcheck` je generisao izveštaj sa nekoliko veoma značajnih nalaza:
+- **`arrayIndexOutOfBounds`**: Alat je prijavio potencijalni pristup van granica niza u funkciji `OurReader::match` (fajl `json_reader.cpp`, linija 1271). Iako detaljna manuelna analiza koda sugeriše da je ovo možda lažno pozitivan rezultat zbog specifičnog načina na koji se parametri prosleđuju, sama činjenica da je alat markirao ovu liniju ukazuje na kompleksnost koda koja može dovesti do grešaka pri budućem održavanju.
+- **`noExplicitConstructor` (20 nalaza)**: Detektovan je veliki broj konstruktora sa jednim argumentom koji nisu obeleženi ključnom rečju `explicit`. Ovo omogućava implicitne konverzije tipova koje mogu dovesti do neočekivanog ponašanja programa.
+- **`constParameter`**: Identifikovano je 6 mesta gde parametri funkcija mogu biti deklarisani kao `const` radi bolje bezbednosti koda.
+- **`unreachableCode`**: Pronađeno je mesto u implementaciji gde određeni deo koda nikada ne može biti izvršen, što ukazuje na potrebu za refaktorizacijom.
+
+### Zaključak
+`Cppcheck` je pružio dragocen uvid u logičku ispravnost koda biblioteke `jsoncpp`. Nalazi poput `arrayIndexOutOfBounds` (čak i ako se ispostavi da su lažno pozitivni) su od izuzetnog značaja za analizu jer ukazuju na kritične tačke u kodu. Ovaj alat dopunjuje `Clang-Tidy` fokusirajući se na robusnost i stabilnost, a ne samo na stil pisanja.
+
 
 
 

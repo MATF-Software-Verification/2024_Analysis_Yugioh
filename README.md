@@ -19,4 +19,7 @@
 3. **Clang-Tidy**
    - Alat za statičku analizu koda koji proverava usklađenost sa stilom i pronalazi potencijalne logičke greške.
    - **Instrukcije:** Pokrenuti skriptu `./clang_tidy/run_clang_tidy.sh`. Izveštaj se nalazi u `clang_tidy/clang_tidy_report.txt`.
+4. **Cppcheck**
+   - Alat za statičku analizu C/C++ koda koji se fokusira na bagove, nedefinisano ponašanje i opasne konstrukcije koda.
+   - **Instrukcije:** Pokrenuti skriptu `./cppcheck/run_cppcheck.sh`. Izveštaj se nalazi u `cppcheck/cppcheck_report.txt`.
 
