@@ -22,4 +22,10 @@
 4. **Cppcheck**
    - Alat za statičku analizu C/C++ koda koji se fokusira na bagove, nedefinisano ponašanje i opasne konstrukcije koda.
    - **Instrukcije:** Pokrenuti skriptu `./cppcheck/run_cppcheck.sh`. Izveštaj se nalazi u `cppcheck/cppcheck_report.txt`.
+5. **GCC Static Analyzer**
+   - Staticka analiza ugradjena u GCC kompajler (`-fanalyzer`). Detektuje curenje memorije, double-free, use-after-free, itd.
+   - **Instrukcije:** Pokrenuti skriptu `./gcc_static_analysis/run_gcc_analyzer.sh`. Izveštaj se nalazi u `gcc_static_analysis/gcc_analyzer_report.txt`.
+6. **Lizard**
+   - Alat za merenje kompleksnosti koda (Cyclomatic Complexity Number - CCN). Ukazuje na funkcije koje su teske za odrzavanje i testiranje.
+   - **Instrukcije:** Pokrenuti skriptu `./lizard_analysis/run_lizard.sh`. Skripta automatski kreira Python virtuelno okruzenje i instalira alat. Izveštaj se nalazi u `lizard_analysis/lizard_report.txt`.
 

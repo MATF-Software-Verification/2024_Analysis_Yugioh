@@ -1,176 +1,176 @@
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:0:0: information: Too many #ifdef configurations - cppcheck only checks 12 of 25 configurations. Use --force to check all configurations. [toomanyconfigs]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:0:0: [31minformation:[39m Too many #ifdef configurations - cppcheck only checks 12 of 25 configurations. Use --force to check all configurations. [toomanyconfigs][0m
 
 ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:1271:35: error: Array 'pattern[3]' accessed at index 6, which is out of bounds. [arrayIndexOutOfBounds]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:1271:35: [31merror:[39m Array 'pattern[3]' accessed at index 6, which is out of bounds. [arrayIndexOutOfBounds][0m
     if (current_[index] != pattern[index])
                                   ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:1188:62: note: Calling function 'match', 2nd argument '7' value is 7
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:1188:62: [2mnote:[0m Calling function 'match', 2nd argument '7' value is 7
       ok = features_.allowSpecialFloats_ && match("nfinity", 7);
                                                              ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:1267:23: note: Assuming condition is Assuming condition is false
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:1267:23: [2mnote:[0m Assuming condition is Assuming condition is false
   if (end_ - current_ < patternLength)
                       ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:1269:15: note: Assignment 'index=patternLength', assigned value is 7
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:1269:15: [2mnote:[0m Assignment 'index=patternLength', assigned value is 7
   int index = patternLength;
               ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:1270:10: note: index is decremented', new value is 6
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:1270:10: [2mnote:[0m index is decremented', new value is 6
   while (index--)
          ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:1271:35: note: Array index out of bounds
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:1271:35: [2mnote:[0m Array index out of bounds
     if (current_[index] != pattern[index])
                                   ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:78:3: style: Class 'Exception' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:78:3: [31mstyle:[39m Class 'Exception' has a constructor with 1 argument that is not explicit. [noExplicitConstructor][0m
   Exception(String msg);
   ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:94:3: style: Class 'RuntimeError' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:94:3: [31mstyle:[39m Class 'RuntimeError' has a constructor with 1 argument that is not explicit. [noExplicitConstructor][0m
   RuntimeError(String const& msg);
   ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:105:3: style: Class 'LogicError' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:105:3: [31mstyle:[39m Class 'LogicError' has a constructor with 1 argument that is not explicit. [noExplicitConstructor][0m
   LogicError(String const& msg);
   ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:325:3: style: Class 'Value' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:325:3: [31mstyle:[39m Class 'Value' has a constructor with 1 argument that is not explicit. [noExplicitConstructor][0m
   Value(Int value);
   ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:326:3: style: Class 'Value' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:326:3: [31mstyle:[39m Class 'Value' has a constructor with 1 argument that is not explicit. [noExplicitConstructor][0m
   Value(UInt value);
   ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:328:3: style: Class 'Value' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:328:3: [31mstyle:[39m Class 'Value' has a constructor with 1 argument that is not explicit. [noExplicitConstructor][0m
   Value(Int64 value);
   ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:329:3: style: Class 'Value' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:329:3: [31mstyle:[39m Class 'Value' has a constructor with 1 argument that is not explicit. [noExplicitConstructor][0m
   Value(UInt64 value);
   ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:331:3: style: Class 'Value' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:331:3: [31mstyle:[39m Class 'Value' has a constructor with 1 argument that is not explicit. [noExplicitConstructor][0m
   Value(double value);
   ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:332:3: style: Class 'Value' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:332:3: [31mstyle:[39m Class 'Value' has a constructor with 1 argument that is not explicit. [noExplicitConstructor][0m
   Value(const char* value); ///< Copy til first 0. (NULL causes to seg-fault.)
   ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:351:3: style: Class 'Value' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:351:3: [31mstyle:[39m Class 'Value' has a constructor with 1 argument that is not explicit. [noExplicitConstructor][0m
   Value(const StaticString& value);
   ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:352:3: style: Class 'Value' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:352:3: [31mstyle:[39m Class 'Value' has a constructor with 1 argument that is not explicit. [noExplicitConstructor][0m
   Value(const String& value);
   ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:356:3: style: Class 'Value' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:356:3: [31mstyle:[39m Class 'Value' has a constructor with 1 argument that is not explicit. [noExplicitConstructor][0m
   Value(bool value);
   ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:272:5: style: Class 'CZString' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:272:5: [31mstyle:[39m Class 'CZString' has a constructor with 1 argument that is not explicit. [noExplicitConstructor][0m
     CZString(ArrayIndex index);
     ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:789:3: style: Class 'PathArgument' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:789:3: [31mstyle:[39m Class 'PathArgument' has a constructor with 1 argument that is not explicit. [noExplicitConstructor][0m
   PathArgument(ArrayIndex index);
   ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:790:3: style: Class 'PathArgument' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:790:3: [31mstyle:[39m Class 'PathArgument' has a constructor with 1 argument that is not explicit. [noExplicitConstructor][0m
   PathArgument(const char* key);
   ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:791:3: style: Class 'PathArgument' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:791:3: [31mstyle:[39m Class 'PathArgument' has a constructor with 1 argument that is not explicit. [noExplicitConstructor][0m
   PathArgument(String key);
   ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:813:3: style: Class 'Path' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:813:3: [31mstyle:[39m Class 'Path' has a constructor with 1 argument that is not explicit. [noExplicitConstructor][0m
   Path(const String& path, const PathArgument& a1 = PathArgument(),
   ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:926:3: style: Class 'ValueConstIterator' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:926:3: [31mstyle:[39m Class 'ValueConstIterator' has a constructor with 1 argument that is not explicit. [noExplicitConstructor][0m
   ValueConstIterator(ValueIterator const& other);
   ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/reader.h:61:3: style: Class 'Reader' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/reader.h:61:3: [31mstyle:[39m Class 'Reader' has a constructor with 1 argument that is not explicit. [noExplicitConstructor][0m
   Reader(const Features& features);
   ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:690:56: style: inconclusive: Function 'decodeUnicodeEscapeSequence' argument 4 names different: declaration 'unicode' definition 'ret_unicode'. [funcArgNamesDifferent]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:690:56: [31m[35mstyle: inconclusive:[39m Function 'decodeUnicodeEscapeSequence' argument 4 names different: declaration 'unicode' definition 'ret_unicode'. [funcArgNamesDifferent][0m
                                          unsigned int& ret_unicode) {
                                                        ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/reader.h:213:64: note: Function 'decodeUnicodeEscapeSequence' argument 4 names different: declaration 'unicode' definition 'ret_unicode'.
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/reader.h:213:64: [2mnote:[0m Function 'decodeUnicodeEscapeSequence' argument 4 names different: declaration 'unicode' definition 'ret_unicode'.
                                    Location end, unsigned int& unicode);
                                                                ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:690:56: note: Function 'decodeUnicodeEscapeSequence' argument 4 names different: declaration 'unicode' definition 'ret_unicode'.
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:690:56: [2mnote:[0m Function 'decodeUnicodeEscapeSequence' argument 4 names different: declaration 'unicode' definition 'ret_unicode'.
                                          unsigned int& ret_unicode) {
                                                        ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:1724:59: style: inconclusive: Function 'decodeUnicodeEscapeSequence' argument 4 names different: declaration 'unicode' definition 'ret_unicode'. [funcArgNamesDifferent]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:1724:59: [31m[35mstyle: inconclusive:[39m Function 'decodeUnicodeEscapeSequence' argument 4 names different: declaration 'unicode' definition 'ret_unicode'. [funcArgNamesDifferent][0m
                                             unsigned int& ret_unicode) {
                                                           ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:945:64: note: Function 'decodeUnicodeEscapeSequence' argument 4 names different: declaration 'unicode' definition 'ret_unicode'.
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:945:64: [2mnote:[0m Function 'decodeUnicodeEscapeSequence' argument 4 names different: declaration 'unicode' definition 'ret_unicode'.
                                    Location end, unsigned int& unicode);
                                                                ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:1724:59: note: Function 'decodeUnicodeEscapeSequence' argument 4 names different: declaration 'unicode' definition 'ret_unicode'.
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:1724:59: [2mnote:[0m Function 'decodeUnicodeEscapeSequence' argument 4 names different: declaration 'unicode' definition 'ret_unicode'.
                                             unsigned int& ret_unicode) {
                                                           ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:438:32: style: Parameter 'token' can be declared with const [constParameter]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:438:32: [31mstyle:[39m Parameter 'token' can be declared with const [constParameter][0m
 bool Reader::readObject(Token& token) {
                                ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:485:31: style: Parameter 'token' can be declared with const [constParameter]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:485:31: [31mstyle:[39m Parameter 'token' can be declared with const [constParameter][0m
 bool Reader::readArray(Token& token) {
                               ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:714:53: style: Parameter 'token' can be declared with const [constParameter]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:714:53: [31mstyle:[39m Parameter 'token' can be declared with const [constParameter][0m
 bool Reader::addError(const String& message, Token& token, Location extra) {
                                                     ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:1423:35: style: Parameter 'token' can be declared with const [constParameter]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:1423:35: [31mstyle:[39m Parameter 'token' can be declared with const [constParameter][0m
 bool OurReader::readObject(Token& token) {
                                   ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:1478:34: style: Parameter 'token' can be declared with const [constParameter]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:1478:34: [31mstyle:[39m Parameter 'token' can be declared with const [constParameter][0m
 bool OurReader::readArray(Token& token) {
                                  ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:1748:56: style: Parameter 'token' can be declared with const [constParameter]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:1748:56: [31mstyle:[39m Parameter 'token' can be declared with const [constParameter][0m
 bool OurReader::addError(const String& message, Token& token, Location extra) {
                                                        ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:46:0: information: Skipping configuration 'JSONCPP_DEPRECATED_STACK_LIMIT' since the value of 'JSONCPP_DEPRECATED_STACK_LIMIT' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:46:0: [31minformation:[39m Skipping configuration 'JSONCPP_DEPRECATED_STACK_LIMIT' since the value of 'JSONCPP_DEPRECATED_STACK_LIMIT' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked][0m
     JSONCPP_DEPRECATED_STACK_LIMIT; // see readValue()
 ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:110:0: information: Skipping configuration 'JSONCPP_NORETURN' since the value of 'JSONCPP_NORETURN' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:110:0: [31minformation:[39m Skipping configuration 'JSONCPP_NORETURN' since the value of 'JSONCPP_NORETURN' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked][0m
 JSONCPP_NORETURN void throwRuntimeError(String const& msg);
 ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:112:0: information: Skipping configuration 'JSONCPP_NORETURN' since the value of 'JSONCPP_NORETURN' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:112:0: [31minformation:[39m Skipping configuration 'JSONCPP_NORETURN' since the value of 'JSONCPP_NORETURN' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked][0m
 JSONCPP_NORETURN void throwLogicError(String const& msg);
 ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:430:0: information: Skipping configuration 'JSONCPP_TEMPLATE_DELETE' since the value of 'JSONCPP_TEMPLATE_DELETE' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:430:0: [31minformation:[39m Skipping configuration 'JSONCPP_TEMPLATE_DELETE' since the value of 'JSONCPP_TEMPLATE_DELETE' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked][0m
   template <typename T> T as() const JSONCPP_TEMPLATE_DELETE;
 ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:431:0: information: Skipping configuration 'JSONCPP_TEMPLATE_DELETE' since the value of 'JSONCPP_TEMPLATE_DELETE' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:431:0: [31minformation:[39m Skipping configuration 'JSONCPP_TEMPLATE_DELETE' since the value of 'JSONCPP_TEMPLATE_DELETE' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked][0m
   template <typename T> bool is() const JSONCPP_TEMPLATE_DELETE;
 ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:430:0: information: Skipping configuration 'JSONCPP_TEMPLATE_DELETE;__apple_build_version__;__clang__' since the value of 'JSONCPP_TEMPLATE_DELETE' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:430:0: [31minformation:[39m Skipping configuration 'JSONCPP_TEMPLATE_DELETE;__apple_build_version__;__clang__' since the value of 'JSONCPP_TEMPLATE_DELETE' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked][0m
   template <typename T> T as() const JSONCPP_TEMPLATE_DELETE;
 ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:431:0: information: Skipping configuration 'JSONCPP_TEMPLATE_DELETE;__apple_build_version__;__clang__' since the value of 'JSONCPP_TEMPLATE_DELETE' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:431:0: [31minformation:[39m Skipping configuration 'JSONCPP_TEMPLATE_DELETE;__apple_build_version__;__clang__' since the value of 'JSONCPP_TEMPLATE_DELETE' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked][0m
   template <typename T> bool is() const JSONCPP_TEMPLATE_DELETE;
 ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:430:0: information: Skipping configuration 'JSONCPP_TEMPLATE_DELETE;__clang__' since the value of 'JSONCPP_TEMPLATE_DELETE' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:430:0: [31minformation:[39m Skipping configuration 'JSONCPP_TEMPLATE_DELETE;__clang__' since the value of 'JSONCPP_TEMPLATE_DELETE' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked][0m
   template <typename T> T as() const JSONCPP_TEMPLATE_DELETE;
 ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:431:0: information: Skipping configuration 'JSONCPP_TEMPLATE_DELETE;__clang__' since the value of 'JSONCPP_TEMPLATE_DELETE' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:431:0: [31minformation:[39m Skipping configuration 'JSONCPP_TEMPLATE_DELETE;__clang__' since the value of 'JSONCPP_TEMPLATE_DELETE' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked][0m
   template <typename T> bool is() const JSONCPP_TEMPLATE_DELETE;
 ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/config.h:130:0: information: Skipping configuration 'JSONCPP_USE_SECURE_MEMORY' since the value of 'JSONCPP_USE_SECURE_MEMORY' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/config.h:130:0: [31minformation:[39m Skipping configuration 'JSONCPP_USE_SECURE_MEMORY' since the value of 'JSONCPP_USE_SECURE_MEMORY' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked][0m
     typename std::conditional<JSONCPP_USE_SECURE_MEMORY, SecureAllocator<T>,
 ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_value.cpp:0:0: information: Too many #ifdef configurations - cppcheck only checks 12 of 27 configurations. Use --force to check all configurations. [toomanyconfigs]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_value.cpp:0:0: [31minformation:[39m Too many #ifdef configurations - cppcheck only checks 12 of 27 configurations. Use --force to check all configurations. [toomanyconfigs][0m
 
 ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_value.cpp:143:3: style: Statements following return, break, continue, goto or throw will never be executed. [unreachableCode]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_value.cpp:143:3: [31mstyle:[39m Statements following return, break, continue, goto or throw will never be executed. [unreachableCode][0m
   JSON_ASSERT_MESSAGE(length <= static_cast<unsigned>(Value::maxInt) -
   ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:354:3: style: Class 'Value' has a constructor with 1 argument that is not explicit. [noExplicitConstructor]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:354:3: [31mstyle:[39m Class 'Value' has a constructor with 1 argument that is not explicit. [noExplicitConstructor][0m
   Value(std::string_view value);
   ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_value.cpp:214:0: information: Skipping configuration 'JSONCPP_NORETURN' since the value of 'JSONCPP_NORETURN' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_value.cpp:214:0: [31minformation:[39m Skipping configuration 'JSONCPP_NORETURN' since the value of 'JSONCPP_NORETURN' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked][0m
 JSONCPP_NORETURN void throwRuntimeError(String const& msg) {
 ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_value.cpp:217:0: information: Skipping configuration 'JSONCPP_NORETURN' since the value of 'JSONCPP_NORETURN' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_value.cpp:217:0: [31minformation:[39m Skipping configuration 'JSONCPP_NORETURN' since the value of 'JSONCPP_NORETURN' is unknown. Use -D if you want to check it. You can use -U to skip it explicitly. [ConfigurationNotChecked][0m
 JSONCPP_NORETURN void throwLogicError(String const& msg) {
 ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_writer.cpp:0:0: information: Too many #ifdef configurations - cppcheck only checks 12 of 23 configurations. Use --force to check all configurations. [toomanyconfigs]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_writer.cpp:0:0: [31minformation:[39m Too many #ifdef configurations - cppcheck only checks 12 of 23 configurations. Use --force to check all configurations. [toomanyconfigs][0m
 
 ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:781:0: style: The function 'getFormatedErrorMessages' is never used. [unusedFunction]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:781:0: [31mstyle:[39m The function 'getFormatedErrorMessages' is never used. [unusedFunction][0m
 
 ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:844:0: style: The function 'good' is never used. [unusedFunction]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:844:0: [31mstyle:[39m The function 'good' is never used. [unusedFunction][0m
 
 ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:810:0: style: The function 'pushError' is never used. [unusedFunction]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:810:0: [31mstyle:[39m The function 'pushError' is never used. [unusedFunction][0m
 
 ^
-/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:59:0: style: The function 'strictMode' is never used. [unusedFunction]
+[1m/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_reader.cpp:59:0: [31mstyle:[39m The function 'strictMode' is never used. [unusedFunction][0m
 
 ^
-nofile:0:0: information: Cppcheck cannot find all the include files (use --check-config for details) [missingIncludeSystem]
+[1mnofile:0:0: [31minformation:[39m Cppcheck cannot find all the include files (use --check-config for details) [missingIncludeSystem][0m
 

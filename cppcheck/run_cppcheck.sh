@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Putanje
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 PROJECT_ROOT=$(dirname "$SCRIPT_DIR")
 JSONCPP_SRC="$PROJECT_ROOT/jsoncpp/src/lib_json"
@@ -26,6 +25,5 @@ cppcheck --enable=all \
 
 echo "=== Cppcheck analiza zavrsena. Izvestaj je u: $OUTPUT_FILE ==="
 
-# Ispisivanje rezimea (broj pronadjenih stavki po kategorijama)
 echo -e "\nRezime pronadjenih stavki:"
 grep -o "\[.*\]" "$OUTPUT_FILE" | sort | uniq -c | sort -nr

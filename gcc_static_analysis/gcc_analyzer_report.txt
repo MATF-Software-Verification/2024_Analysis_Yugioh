@@ -1,0 +1,623 @@
+/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_value.cpp: In function ‘std::unique_ptr<T> Json::cloneUnique(const std::unique_ptr<T>&) [with T = std::array<std::__cxx11::basic_string<char>, 3>]’:
+/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_value.cpp:59:28: warning: use of possibly-NULL ‘operator new(96)’ where non-null expected [CWE-690] [-Wanalyzer-possible-null-argument]
+   59 |     r = std::unique_ptr<T>(new T(*p));
+      |                            ^~~~~~~~~
+  ‘void __gnu_cxx::new_allocator<_Tp>::construct(_Up*, _Args&& ...) [with _Up = std::pair<const Json::Value::CZString, Json::Value>; _Args = {const std::pair<const Json::Value::CZString, Json::Value>&}; _Tp = std::_Rb_tree_node<std::pair<const Json::Value::CZString, Json::Value> >]’: events 1-2
+    |
+    |/usr/include/c++/11/ext/new_allocator.h:160:9:
+    |  160 |         construct(_Up* __p, _Args&&... __args)
+    |      |         ^~~~~~~~~
+    |      |         |
+    |      |         (1) entry to ‘__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<const Json::Value::CZString, Json::Value> > >::construct<std::pair<const Json::Value::CZString, Json::Value>, const std::pair<const Json::Value::CZString, Json::Value>&>’
+    |  161 |         noexcept(std::is_nothrow_constructible<_Up, _Args...>::value)
+    |  162 |         { ::new((void *)__p) _Up(std::forward<_Args>(__args)...); }
+    |      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    |      |           |
+    |      |           (2) calling ‘std::pair<const Json::Value::CZString, Json::Value>::pair’ from ‘__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<const Json::Value::CZString, Json::Value> > >::construct<std::pair<const Json::Value::CZString, Json::Value>, const std::pair<const Json::Value::CZString, Json::Value>&>’
+    |
+    +--> ‘std::pair<_T1, _T2>::pair(const std::pair<_T1, _T2>&) [with _T1 = const Json::Value::CZString; _T2 = Json::Value]’: events 3-4
+           |
+           |/usr/include/c++/11/bits/stl_pair.h:314:17:
+           |  314 |       constexpr pair(const pair&) = default;    ///< Copy constructor
+           |      |                 ^~~~
+           |      |                 |
+           |      |                 (3) entry to ‘std::pair<const Json::Value::CZString, Json::Value>::pair’
+           |      |                 (4) calling ‘Json::Value::Value’ from ‘std::pair<const Json::Value::CZString, Json::Value>::pair’
+           |
+           +--> ‘Json::Value::Value(const Json::Value&)’: events 5-6
+                  |
+                  |/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_value.cpp:445:1:
+                  |  445 | Value::Value(const Value& other) {
+                  |      | ^~~~~
+                  |      | |
+                  |      | (5) entry to ‘Json::Value::Value’
+                  |  446 |   dupPayload(other);
+                  |      |   ~~~~~~~~~~~~~~~~~
+                  |      |             |
+                  |      |             (6) calling ‘Json::Value::dupPayload’ from ‘Json::Value::Value’
+                  |
+                  +--> ‘void Json::Value::dupPayload(const Json::Value&)’: events 7-10
+                         |
+                         | 1010 | void Value::dupPayload(const Value& other) {
+                         |      |      ^~~~~
+                         |      |      |
+                         |      |      (7) entry to ‘Json::Value::dupPayload’
+                         |......
+                         | 1013 |   switch (type()) {
+                         |      |   ~~~~~~
+                         |      |   |
+                         |      |   (8) following ‘case 5:’ branch...
+                         |......
+                         | 1033 |   case arrayValue:
+                         |      |   ~~~~
+                         |      |   |
+                         |      |   (9) ...to here
+                         | 1034 |   case objectValue:
+                         | 1035 |     value_.map_ = new ObjectValues(*other.value_.map_);
+                         |      |                                                      ~
+                         |      |                                                      |
+                         |      |                                                      (10) calling ‘std::map<Json::Value::CZString, Json::Value>::map’ from ‘Json::Value::dupPayload’
+                         |
+                         +--> ‘std::map<_Key, _Tp, _Compare, _Alloc>::map(const std::map<_Key, _Tp, _Compare, _Alloc>&) [with _Key = Json::Value::CZString; _Tp = Json::Value; _Compare = std::less<Json::Value::CZString>; _Alloc = std::allocator<std::pair<const Json::Value::CZString, Json::Value> >]’: events 11-12
+                                |
+                                |/usr/include/c++/11/bits/stl_map.h:207:7:
+                                |  207 |       map(const map&) = default;
+                                |      |       ^~~
+                                |      |       |
+                                |      |       (11) entry to ‘std::map<Json::Value::CZString, Json::Value>::map’
+                                |      |       (12) calling ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_Rb_tree’ from ‘std::map<Json::Value::CZString, Json::Value>::map’
+                                |
+                                +--> ‘std::_Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::_Rb_tree(const std::_Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>&) [with _Key = Json::Value::CZString; _Val = std::pair<const Json::Value::CZString, Json::Value>; _KeyOfValue = std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >; _Compare = std::less<Json::Value::CZString>; _Alloc = std::allocator<std::pair<const Json::Value::CZString, Json::Value> >]’: events 13-16
+                                       |
+                                       |/usr/include/c++/11/bits/stl_tree.h:935:7:
+                                       |  935 |       _Rb_tree(const _Rb_tree& __x)
+                                       |      |       ^~~~~~~~
+                                       |      |       |
+                                       |      |       (13) entry to ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_Rb_tree’
+                                       |......
+                                       |  938 |         if (__x._M_root() != 0)
+                                       |      |         ~~
+                                       |      |         |
+                                       |      |         (14) following ‘true’ branch...
+                                       |  939 |           _M_root() = _M_copy(__x);
+                                       |      |           ~~~~~~~~~   ~~~~~~~~~~~~
+                                       |      |                  |           |
+                                       |      |                  |           (16) calling ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_M_copy’ from ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_Rb_tree’
+                                       |      |                  (15) ...to here
+                                       |
+                                       +--> ‘std::_Rb_tree_node<_Val>* std::_Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::_M_copy(const std::_Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>&) [with _Key = Json::Value::CZString; _Val = std::pair<const Json::Value::CZString, Json::Value>; _KeyOfValue = std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >; _Compare = std::less<Json::Value::CZString>; _Alloc = std::allocator<std::pair<const Json::Value::CZString, Json::Value> >]’: events 17-18
+                                              |
+                                              |  898 |       _M_copy(const _Rb_tree& __x)
+                                              |      |       ^~~~~~~
+                                              |      |       |
+                                              |      |       (17) entry to ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_M_copy’
+                                              |......
+                                              |  901 |         return _M_copy<__as_lvalue>(__x, __an);
+                                              |      |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                              |      |                                    |
+                                              |      |                                    (18) calling ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_M_copy<false, std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_Alloc_node>’ from ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_M_copy’
+                                              |
+                                              +--> ‘std::_Rb_tree_node<_Val>* std::_Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::_M_copy(const std::_Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>&, _NodeGen&) [with bool _MoveValues = false; _NodeGen = std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_Alloc_node; _Key = Json::Value::CZString; _Val = std::pair<const Json::Value::CZString, Json::Value>; _KeyOfValue = std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >; _Compare = std::less<Json::Value::CZString>; _Alloc = std::allocator<std::pair<const Json::Value::CZString, Json::Value> >]’: events 19-20
+                                                     |
+                                                     |  887 |         _M_copy(const _Rb_tree& __x, _NodeGen& __gen)
+                                                     |      |         ^~~~~~~
+                                                     |      |         |
+                                                     |      |         (19) entry to ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_M_copy<false, std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_Alloc_node>’
+                                                     |......
+                                                     |  890 |             _M_copy<_MoveValues>(__x._M_mbegin(), _M_end(), __gen);
+                                                     |      |             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                     |      |                                 |
+                                                     |      |                                 (20) calling ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_M_copy<false, std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_Alloc_node>’ from ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_M_copy<false, std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_Alloc_node>’
+                                                     |
+                                                     +--> ‘std::_Rb_tree_node<_Val>* std::_Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::_M_copy(std::_Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::_Link_type, std::_Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::_Base_ptr, _NodeGen&) [with bool _MoveValues = false; _NodeGen = std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_Alloc_node; _Key = Json::Value::CZString; _Val = std::pair<const Json::Value::CZString, Json::Value>; _KeyOfValue = std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >; _Compare = std::less<Json::Value::CZString>; _Alloc = std::allocator<std::pair<const Json::Value::CZString, Json::Value> >]’: events 21-22
+                                                            |
+                                                            | 1845 |       _Rb_tree<_Key, _Val, _KoV, _Compare, _Alloc>::
+                                                            |      |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                            |      |       |
+                                                            |      |       (21) entry to ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_M_copy<false, std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_Alloc_node>’
+                                                            |......
+                                                            | 1849 |         _Link_type __top = _M_clone_node<_MoveValues>(__x, __node_gen);
+                                                            |      |                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                            |      |                                                      |
+                                                            |      |                                                      (22) calling ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_M_clone_node<false, std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_Alloc_node>’ from ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_M_copy<false, std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_Alloc_node>’
+                                                            |
+                                                            +--> ‘std::_Rb_tree_node<_Val>* std::_Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::_M_clone_node(std::_Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::_Link_type, _NodeGen&) [with bool _MoveValue = false; _NodeGen = std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_Alloc_node; _Key = Json::Value::CZString; _Val = std::pair<const Json::Value::CZString, Json::Value>; _KeyOfValue = std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >; _Compare = std::less<Json::Value::CZString>; _Alloc = std::allocator<std::pair<const Json::Value::CZString, Json::Value> >]’: events 23-24
+                                                                   |
+                                                                   |  637 |         _M_clone_node(_Link_type __x, _NodeGen& __node_gen)
+                                                                   |      |         ^~~~~~~~~~~~~
+                                                                   |      |         |
+                                                                   |      |         (23) entry to ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_M_clone_node<false, std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_Alloc_node>’
+                                                                   |......
+                                                                   |  645 |             = __node_gen(_GLIBCXX_FORWARD(_Vp, *__x->_M_valptr()));
+                                                                   |      |               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                   |      |                         |
+                                                                   |      |                         (24) calling ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_Alloc_node::operator()<const std::pair<const Json::Value::CZString, Json::Value>&>’ from ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_M_clone_node<false, std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_Alloc_node>’
+                                                                   |
+                                                                   +--> ‘std::_Rb_tree_node<_Val>* std::_Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::_Alloc_node::operator()(_Arg&&) const [with _Arg = const std::pair<const Json::Value::CZString, Json::Value>&; _Key = Json::Value::CZString; _Val = std::pair<const Json::Value::CZString, Json::Value>; _KeyOfValue = std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >; _Compare = std::less<Json::Value::CZString>; _Alloc = std::allocator<std::pair<const Json::Value::CZString, Json::Value> >]’: events 25-26
+                                                                          |
+                                                                          |  528 |           operator()(_GLIBCXX_FWDREF(_Arg) __arg) const
+                                                                          |      |           ^~~~~~~~
+                                                                          |      |           |
+                                                                          |      |           (25) entry to ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_Alloc_node::operator()<const std::pair<const Json::Value::CZString, Json::Value>&>’
+                                                                          |  529 |           { return _M_t._M_create_node(_GLIBCXX_FORWARD(_Arg, __arg)); }
+                                                                          |      |                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                          |      |                                       |
+                                                                          |      |                                       (26) calling ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_M_create_node<const std::pair<const Json::Value::CZString, Json::Value>&>’ from ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_Alloc_node::operator()<const std::pair<const Json::Value::CZString, Json::Value>&>’
+                                                                          |
+                                                                          +--> ‘std::_Rb_tree_node<_Val>* std::_Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::_M_create_node(_Args&& ...) [with _Args = {const std::pair<const Json::Value::CZString, Json::Value>&}; _Key = Json::Value::CZString; _Val = std::pair<const Json::Value::CZString, Json::Value>; _KeyOfValue = std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >; _Compare = std::less<Json::Value::CZString>; _Alloc = std::allocator<std::pair<const Json::Value::CZString, Json::Value> >]’: events 27-28
+                                                                                 |
+                                                                                 |  609 |         _M_create_node(_Args&&... __args)
+                                                                                 |      |         ^~~~~~~~~~~~~~
+                                                                                 |      |         |
+                                                                                 |      |         (27) entry to ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_M_create_node<const std::pair<const Json::Value::CZString, Json::Value>&>’
+                                                                                 |  610 |         {
+                                                                                 |  611 |           _Link_type __tmp = _M_get_node();
+                                                                                 |      |                              ~~~~~~~~~~~~~
+                                                                                 |      |                                         |
+                                                                                 |      |                                         (28) calling ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_M_get_node’ from ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_M_create_node<const std::pair<const Json::Value::CZString, Json::Value>&>’
+                                                                                 |
+                                                                                 +--> ‘std::_Rb_tree_node<_Val>* std::_Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::_M_get_node() [with _Key = Json::Value::CZString; _Val = std::pair<const Json::Value::CZString, Json::Value>; _KeyOfValue = std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >; _Compare = std::less<Json::Value::CZString>; _Alloc = std::allocator<std::pair<const Json::Value::CZString, Json::Value> >]’: events 29-30
+                                                                                        |
+                                                                                        |  560 |       _M_get_node()
+                                                                                        |      |       ^~~~~~~~~~~
+                                                                                        |      |       |
+                                                                                        |      |       (29) entry to ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_M_get_node’
+                                                                                        |  561 |       { return _Alloc_traits::allocate(_M_get_Node_allocator(), 1); }
+                                                                                        |      |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                        |      |                                       |
+                                                                                        |      |                                       (30) calling ‘std::allocator_traits<std::allocator<std::_Rb_tree_node<std::pair<const Json::Value::CZString, Json::Value> > > >::allocate’ from ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_M_get_node’
+                                                                                        |
+                                                                                        +--> ‘static _Tp* std::allocator_traits<std::allocator<_CharT> >::allocate(std::allocator_traits<std::allocator<_CharT> >::allocator_type&, std::allocator_traits<std::allocator<_CharT> >::size_type) [with _Tp = std::_Rb_tree_node<std::pair<const Json::Value::CZString, Json::Value> >]’: events 31-32
+                                                                                               |
+                                                                                               |/usr/include/c++/11/bits/alloc_traits.h:463:7:
+                                                                                               |  463 |       allocate(allocator_type& __a, size_type __n)
+                                                                                               |      |       ^~~~~~~~
+                                                                                               |      |       |
+                                                                                               |      |       (31) entry to ‘std::allocator_traits<std::allocator<std::_Rb_tree_node<std::pair<const Json::Value::CZString, Json::Value> > > >::allocate’
+                                                                                               |  464 |       { return __a.allocate(__n); }
+                                                                                               |      |                ~~~~~~~~~~~~~~~~~
+                                                                                               |      |                            |
+                                                                                               |      |                            (32) calling ‘__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<const Json::Value::CZString, Json::Value> > >::allocate’ from ‘std::allocator_traits<std::allocator<std::_Rb_tree_node<std::pair<const Json::Value::CZString, Json::Value> > > >::allocate’
+                                                                                               |
+                                                                                               +--> ‘_Tp* __gnu_cxx::new_allocator<_Tp>::allocate(__gnu_cxx::new_allocator<_Tp>::size_type, const void*) [with _Tp = std::_Rb_tree_node<std::pair<const Json::Value::CZString, Json::Value> >]’: events 33-35
+                                                                                                      |
+                                                                                                      |/usr/include/c++/11/ext/new_allocator.h:103:7:
+                                                                                                      |  103 |       allocate(size_type __n, const void* = static_cast<const void*>(0))
+                                                                                                      |      |       ^~~~~~~~
+                                                                                                      |      |       |
+                                                                                                      |      |       (33) entry to ‘__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<const Json::Value::CZString, Json::Value> > >::allocate’
+                                                                                                      |......
+                                                                                                      |  111 |         if (__builtin_expect(__n > this->_M_max_size(), false))
+                                                                                                      |      |         ~~
+                                                                                                      |      |         |
+                                                                                                      |      |         (34) following ‘false’ branch...
+                                                                                                      |......
+                                                                                                      |  127 |         return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp)));
+                                                                                                      |      |                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                      |      |                                                |
+                                                                                                      |      |                                                (35) ...to here
+                                                                                                      |
+                                                                                               <------+
+                                                                                               |
+                                                                                             ‘static _Tp* std::allocator_traits<std::allocator<_CharT> >::allocate(std::allocator_traits<std::allocator<_CharT> >::allocator_type&, std::allocator_traits<std::allocator<_CharT> >::size_type) [with _Tp = std::_Rb_tree_node<std::pair<const Json::Value::CZString, Json::Value> >]’: event 36
+                                                                                               |
+                                                                                               |/usr/include/c++/11/bits/alloc_traits.h:464:28:
+                                                                                               |  464 |       { return __a.allocate(__n); }
+                                                                                               |      |                ~~~~~~~~~~~~^~~~~
+                                                                                               |      |                            |
+                                                                                               |      |                            (36) returning to ‘std::allocator_traits<std::allocator<std::_Rb_tree_node<std::pair<const Json::Value::CZString, Json::Value> > > >::allocate’ from ‘__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<const Json::Value::CZString, Json::Value> > >::allocate’
+                                                                                               |
+                                                                                        <------+
+                                                                                        |
+                                                                                      ‘std::_Rb_tree_node<_Val>* std::_Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::_M_get_node() [with _Key = Json::Value::CZString; _Val = std::pair<const Json::Value::CZString, Json::Value>; _KeyOfValue = std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >; _Compare = std::less<Json::Value::CZString>; _Alloc = std::allocator<std::pair<const Json::Value::CZString, Json::Value> >]’: event 37
+                                                                                        |
+                                                                                        |/usr/include/c++/11/bits/stl_tree.h:561:39:
+                                                                                        |  561 |       { return _Alloc_traits::allocate(_M_get_Node_allocator(), 1); }
+                                                                                        |      |                ~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                        |      |                                       |
+                                                                                        |      |                                       (37) returning to ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_M_get_node’ from ‘std::allocator_traits<std::allocator<std::_Rb_tree_node<std::pair<const Json::Value::CZString, Json::Value> > > >::allocate’
+                                                                                        |
+                                                                                 <------+
+                                                                                 |
+                                                                               ‘std::_Rb_tree_node<_Val>* std::_Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::_M_create_node(_Args&& ...) [with _Args = {const std::pair<const Json::Value::CZString, Json::Value>&}; _Key = Json::Value::CZString; _Val = std::pair<const Json::Value::CZString, Json::Value>; _KeyOfValue = std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >; _Compare = std::less<Json::Value::CZString>; _Alloc = std::allocator<std::pair<const Json::Value::CZString, Json::Value> >]’: events 38-39
+                                                                                 |
+                                                                                 |  611 |           _Link_type __tmp = _M_get_node();
+                                                                                 |      |                              ~~~~~~~~~~~^~
+                                                                                 |      |                                         |
+                                                                                 |      |                                         (38) returning to ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_M_create_node<const std::pair<const Json::Value::CZString, Json::Value>&>’ from ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_M_get_node’
+                                                                                 |  612 |           _M_construct_node(__tmp, std::forward<_Args>(__args)...);
+                                                                                 |      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                 |      |                            |
+                                                                                 |      |                            (39) calling ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_M_construct_node<const std::pair<const Json::Value::CZString, Json::Value>&>’ from ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_M_create_node<const std::pair<const Json::Value::CZString, Json::Value>&>’
+                                                                                 |
+                                                                                 +--> ‘void std::_Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::_M_construct_node(std::_Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::_Link_type, _Args&& ...) [with _Args = {const std::pair<const Json::Value::CZString, Json::Value>&}; _Key = Json::Value::CZString; _Val = std::pair<const Json::Value::CZString, Json::Value>; _KeyOfValue = std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >; _Compare = std::less<Json::Value::CZString>; _Alloc = std::allocator<std::pair<const Json::Value::CZString, Json::Value> >]’: events 40-41
+                                                                                        |
+                                                                                        |  590 |         _M_construct_node(_Link_type __node, _Args&&... __args)
+                                                                                        |      |         ^~~~~~~~~~~~~~~~~
+                                                                                        |      |         |
+                                                                                        |      |         (40) entry to ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_M_construct_node<const std::pair<const Json::Value::CZString, Json::Value>&>’
+                                                                                        |......
+                                                                                        |  595 |               _Alloc_traits::construct(_M_get_Node_allocator(),
+                                                                                        |      |               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                        |      |                                       |
+                                                                                        |      |                                       (41) calling ‘std::allocator_traits<std::allocator<std::_Rb_tree_node<std::pair<const Json::Value::CZString, Json::Value> > > >::construct<std::pair<const Json::Value::CZString, Json::Value>, const std::pair<const Json::Value::CZString, Json::Value>&>’ from ‘std::_Rb_tree<Json::Value::CZString, std::pair<const Json::Value::CZString, Json::Value>, std::_Select1st<std::pair<const Json::Value::CZString, Json::Value> >, std::less<Json::Value::CZString>, std::allocator<std::pair<const Json::Value::CZString, Json::Value> > >::_M_construct_node<const std::pair<const Json::Value::CZString, Json::Value>&>’
+                                                                                        |  596 |                                        __node->_M_valptr(),
+                                                                                        |      |                                        ~~~~~~~~~~~~~~~~~~~~
+                                                                                        |  597 |                                        std::forward<_Args>(__args)...);
+                                                                                        |      |                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                        |
+                                                                                        +--> ‘static void std::allocator_traits<std::allocator<_CharT> >::construct(std::allocator_traits<std::allocator<_CharT> >::allocator_type&, _Up*, _Args&& ...) [with _Up = std::pair<const Json::Value::CZString, Json::Value>; _Args = {const std::pair<const Json::Value::CZString, Json::Value>&}; _Tp = std::_Rb_tree_node<std::pair<const Json::Value::CZString, Json::Value> >]’: events 42-43
+                                                                                               |
+                                                                                               |/usr/include/c++/11/bits/alloc_traits.h:511:9:
+                                                                                               |  511 |         construct(allocator_type& __a __attribute__((__unused__)), _Up* __p,
+                                                                                               |      |         ^~~~~~~~~
+                                                                                               |      |         |
+                                                                                               |      |         (42) entry to ‘std::allocator_traits<std::allocator<std::_Rb_tree_node<std::pair<const Json::Value::CZString, Json::Value> > > >::construct<std::pair<const Json::Value::CZString, Json::Value>, const std::pair<const Json::Value::CZString, Json::Value>&>’
+                                                                                               |......
+                                                                                               |  516 |           __a.construct(__p, std::forward<_Args>(__args)...);
+                                                                                               |      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                               |      |                        |
+                                                                                               |      |                        (43) calling ‘__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<const Json::Value::CZString, Json::Value> > >::construct<std::pair<const Json::Value::CZString, Json::Value>, const std::pair<const Json::Value::CZString, Json::Value>&>’ from ‘std::allocator_traits<std::allocator<std::_Rb_tree_node<std::pair<const Json::Value::CZString, Json::Value> > > >::construct<std::pair<const Json::Value::CZString, Json::Value>, const std::pair<const Json::Value::CZString, Json::Value>&>’
+                                                                                               |
+                                                                                               +--> ‘void __gnu_cxx::new_allocator<_Tp>::construct(_Up*, _Args&& ...) [with _Up = std::pair<const Json::Value::CZString, Json::Value>; _Args = {const std::pair<const Json::Value::CZString, Json::Value>&}; _Tp = std::_Rb_tree_node<std::pair<const Json::Value::CZString, Json::Value> >]’: events 44-45
+                                                                                                      |
+                                                                                                      |/usr/include/c++/11/ext/new_allocator.h:160:9:
+                                                                                                      |  160 |         construct(_Up* __p, _Args&&... __args)
+                                                                                                      |      |         ^~~~~~~~~
+                                                                                                      |      |         |
+                                                                                                      |      |         (44) entry to ‘__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<const Json::Value::CZString, Json::Value> > >::construct<std::pair<const Json::Value::CZString, Json::Value>, const std::pair<const Json::Value::CZString, Json::Value>&>’
+                                                                                                      |  161 |         noexcept(std::is_nothrow_constructible<_Up, _Args...>::value)
+                                                                                                      |  162 |         { ::new((void *)__p) _Up(std::forward<_Args>(__args)...); }
+                                                                                                      |      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                      |      |           |
+                                                                                                      |      |           (45) calling ‘std::pair<const Json::Value::CZString, Json::Value>::pair’ from ‘__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<const Json::Value::CZString, Json::Value> > >::construct<std::pair<const Json::Value::CZString, Json::Value>, const std::pair<const Json::Value::CZString, Json::Value>&>’
+                                                                                                      |
+                                                                                                      +--> ‘std::pair<_T1, _T2>::pair(const std::pair<_T1, _T2>&) [with _T1 = const Json::Value::CZString; _T2 = Json::Value]’: events 46-47
+                                                                                                             |
+                                                                                                             |/usr/include/c++/11/bits/stl_pair.h:314:17:
+                                                                                                             |  314 |       constexpr pair(const pair&) = default;    ///< Copy constructor
+                                                                                                             |      |                 ^~~~
+                                                                                                             |      |                 |
+                                                                                                             |      |                 (46) entry to ‘std::pair<const Json::Value::CZString, Json::Value>::pair’
+                                                                                                             |      |                 (47) calling ‘Json::Value::Value’ from ‘std::pair<const Json::Value::CZString, Json::Value>::pair’
+                                                                                                             |
+                                                                                                             +--> ‘Json::Value::Value(const Json::Value&)’: events 48-49
+                                                                                                                    |
+                                                                                                                    |/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_value.cpp:445:1:
+                                                                                                                    |  445 | Value::Value(const Value& other) {
+                                                                                                                    |      | ^~~~~
+                                                                                                                    |      | |
+                                                                                                                    |      | (48) entry to ‘Json::Value::Value’
+                                                                                                                    |  446 |   dupPayload(other);
+                                                                                                                    |      |   ~~~~~~~~~~~~~~~~~
+                                                                                                                    |      |             |
+                                                                                                                    |      |             (49) calling ‘Json::Value::dupPayload’ from ‘Json::Value::Value’
+                                                                                                                    |
+                                                                                                                    +--> ‘void Json::Value::dupPayload(const Json::Value&)’: events 50-52
+                                                                                                                           |
+                                                                                                                           | 1010 | void Value::dupPayload(const Value& other) {
+                                                                                                                           |      |      ^~~~~
+                                                                                                                           |      |      |
+                                                                                                                           |      |      (50) entry to ‘Json::Value::dupPayload’
+                                                                                                                           |......
+                                                                                                                           | 1013 |   switch (type()) {
+                                                                                                                           |      |   ~~~~~~
+                                                                                                                           |      |   |
+                                                                                                                           |      |   (51) following ‘case 0 ... 3:’ branch...
+                                                                                                                           | 1014 |   case nullValue:
+                                                                                                                           |      |   ~~~~
+                                                                                                                           |      |   |
+                                                                                                                           |      |   (52) ...to here
+                                                                                                                           |
+                                                                                                                    <------+
+                                                                                                                    |
+                                                                                                                  ‘Json::Value::Value(const Json::Value&)’: events 53-54
+                                                                                                                    |
+                                                                                                                    |  446 |   dupPayload(other);
+                                                                                                                    |      |   ~~~~~~~~~~^~~~~~~
+                                                                                                                    |      |             |
+                                                                                                                    |      |             (53) returning to ‘Json::Value::Value’ from ‘Json::Value::dupPayload’
+                                                                                                                    |  447 |   dupMeta(other);
+                                                                                                                    |      |   ~~~~~~~~~~~~~~
+                                                                                                                    |      |          |
+                                                                                                                    |      |          (54) calling ‘Json::Value::dupMeta’ from ‘Json::Value::Value’
+                                                                                                                    |
+                                                                                                                    +--> ‘void Json::Value::dupMeta(const Json::Value&)’: events 55-56
+                                                                                                                           |
+                                                                                                                           | 1063 | void Value::dupMeta(const Value& other) {
+                                                                                                                           |      |      ^~~~~
+                                                                                                                           |      |      |
+                                                                                                                           |      |      (55) entry to ‘Json::Value::dupMeta’
+                                                                                                                           | 1064 |   comments_ = other.comments_;
+                                                                                                                           |      |                     ~~~~~~~~~
+                                                                                                                           |      |                     |
+                                                                                                                           |      |                     (56) calling ‘Json::Value::Comments::operator=’ from ‘Json::Value::dupMeta’
+                                                                                                                           |
+                                                                                                                           +--> ‘Json::Value::Comments& Json::Value::Comments::operator=(const Json::Value::Comments&)’: events 57-58
+                                                                                                                                  |
+                                                                                                                                  | 1507 | Value::Comments& Value::Comments::operator=(const Comments& that) {
+                                                                                                                                  |      |                  ^~~~~
+                                                                                                                                  |      |                  |
+                                                                                                                                  |      |                  (57) entry to ‘Json::Value::Comments::operator=’
+                                                                                                                                  | 1508 |   ptr_ = cloneUnique(that.ptr_);
+                                                                                                                                  |      |          ~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                                  |      |                     |
+                                                                                                                                  |      |                     (58) calling ‘Json::cloneUnique<std::array<std::__cxx11::basic_string<char>, 3> >’ from ‘Json::Value::Comments::operator=’
+                                                                                                                                  |
+                                                                                                                                  +--> ‘std::unique_ptr<T> Json::cloneUnique(const std::unique_ptr<T>&) [with T = std::array<std::__cxx11::basic_string<char>, 3>]’: events 59-62
+                                                                                                                                         |
+                                                                                                                                         |   56 | static std::unique_ptr<T> cloneUnique(const std::unique_ptr<T>& p) {
+                                                                                                                                         |      |                           ^~~~~~~~~~~
+                                                                                                                                         |      |                           |
+                                                                                                                                         |      |                           (59) entry to ‘Json::cloneUnique<std::array<std::__cxx11::basic_string<char>, 3> >’
+                                                                                                                                         |   57 |   std::unique_ptr<T> r;
+                                                                                                                                         |   58 |   if (p) {
+                                                                                                                                         |      |   ~~                       
+                                                                                                                                         |      |   |
+                                                                                                                                         |      |   (60) following ‘true’ branch...
+                                                                                                                                         |   59 |     r = std::unique_ptr<T>(new T(*p));
+                                                                                                                                         |      |                                  ~~
+                                                                                                                                         |      |                                  |
+                                                                                                                                         |      |                                  (61) ...to here
+                                                                                                                                         |      |                                  (62) calling ‘std::unique_ptr<std::array<std::__cxx11::basic_string<char>, 3> >::operator*’ from ‘Json::cloneUnique<std::array<std::__cxx11::basic_string<char>, 3> >’
+                                                                                                                                         |
+                                                                                                                                         +--> ‘typename std::add_lvalue_reference<_Tp>::type std::unique_ptr<_Tp, _Dp>::operator*() const [with _Tp = std::array<std::__cxx11::basic_string<char>, 3>; _Dp = std::default_delete<std::array<std::__cxx11::basic_string<char>, 3> >]’: event 63
+                                                                                                                                                |
+                                                                                                                                                |/usr/include/c++/11/bits/unique_ptr.h:405:7:
+                                                                                                                                                |  405 |       operator*() const
+                                                                                                                                                |      |       ^~~~~~~~
+                                                                                                                                                |      |       |
+                                                                                                                                                |      |       (63) entry to ‘std::unique_ptr<std::array<std::__cxx11::basic_string<char>, 3> >::operator*’
+                                                                                                                                                |
+                                                                                                                                              ‘typename std::add_lvalue_reference<_Tp>::type std::unique_ptr<_Tp, _Dp>::operator*() const [with _Tp = std::array<std::__cxx11::basic_string<char>, 3>; _Dp = std::default_delete<std::array<std::__cxx11::basic_string<char>, 3> >]’: event 64
+                                                                                                                                                |
+                                                                                                                                                |  407 |         __glibcxx_assert(get() != pointer());
+                                                                                                                                                |      |         ^~~~~~~~~~~~~~~~
+                                                                                                                                                |      |         |
+                                                                                                                                                |      |         (64) following ‘false’ branch...
+                                                                                                                                                |
+                                                                                                                                              ‘typename std::add_lvalue_reference<_Tp>::type std::unique_ptr<_Tp, _Dp>::operator*() const [with _Tp = std::array<std::__cxx11::basic_string<char>, 3>; _Dp = std::default_delete<std::array<std::__cxx11::basic_string<char>, 3> >]’: event 65
+                                                                                                                                                |
+                                                                                                                                                |  408 |         return *get();
+                                                                                                                                                |      |                 ~~~^~
+                                                                                                                                                |      |                    |
+                                                                                                                                                |      |                    (65) ...to here
+                                                                                                                                                |
+                                                                                                                                         <------+
+                                                                                                                                         |
+                                                                                                                                       ‘std::unique_ptr<T> Json::cloneUnique(const std::unique_ptr<T>&) [with T = std::array<std::__cxx11::basic_string<char>, 3>]’: events 66-68
+                                                                                                                                         |
+                                                                                                                                         |/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_value.cpp:59:34:
+                                                                                                                                         |   59 |     r = std::unique_ptr<T>(new T(*p));
+                                                                                                                                         |      |                            ~~~~~~^~~
+                                                                                                                                         |      |                            |     |
+                                                                                                                                         |      |                            |     (66) returning to ‘Json::cloneUnique<std::array<std::__cxx11::basic_string<char>, 3> >’ from ‘std::unique_ptr<std::array<std::__cxx11::basic_string<char>, 3> >::operator*’
+                                                                                                                                         |      |                            (67) this call could return NULL
+                                                                                                                                         |      |                            (68) argument 'this' (‘operator new(96)’) from (67) could be NULL where non-null expected
+                                                                                                                                         |
+In file included from /usr/include/c++/11/tuple:39,
+                 from /usr/include/c++/11/bits/unique_ptr.h:37,
+                 from /usr/include/c++/11/memory:76,
+                 from /home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/config.h:11,
+                 from /home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/assertions.h:13,
+                 from /home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_value.cpp:7:
+/usr/include/c++/11/array:95:12: note: argument 'this' of ‘std::array<std::__cxx11::basic_string<char>, 3>::array(const std::array<std::__cxx11::basic_string<char>, 3>&)’ must be non-null
+   95 |     struct array
+      |            ^~~~~
+/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_value.cpp: In member function ‘void Json::Value::dupPayload(const Json::Value&)’:
+/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_value.cpp:147:42: warning: leak of ‘Json::duplicateAndPrefixStringValue(str, len)’ [CWE-401] [-Wanalyzer-malloc-leak]
+  147 |   size_t actualLength = sizeof(length) + length + 1;
+      |                                          ^~~~~~
+  ‘void __gnu_cxx::new_allocator<_Tp>::construct(_Up*, _Args&& ...) [with _Up = std::pair<const Json::Value::CZString, Json::Value>; _Args = {const std::pair<const Json::Value::CZString, Json::Value>&}; _Tp = std::_Rb_tree_node<std::pair<const Json::Value::CZString, Json::Value> >]’: events 1-2
+    |
+    |/usr/include/c++/11/ext/new_allocator.h:160:9:
+    |  160 |         construct(_Up* __p, _Args&&... __args)
+    |      |         ^~~~~~~~~
+    |      |         |
+    |      |         (1) entry to ‘__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<const Json::Value::CZString, Json::Value> > >::construct<std::pair<const Json::Value::CZString, Json::Value>, const std::pair<const Json::Value::CZString, Json::Value>&>’
+    |  161 |         noexcept(std::is_nothrow_constructible<_Up, _Args...>::value)
+    |  162 |         { ::new((void *)__p) _Up(std::forward<_Args>(__args)...); }
+    |      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    |      |           |
+    |      |           (2) calling ‘std::pair<const Json::Value::CZString, Json::Value>::pair’ from ‘__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<const Json::Value::CZString, Json::Value> > >::construct<std::pair<const Json::Value::CZString, Json::Value>, const std::pair<const Json::Value::CZString, Json::Value>&>’
+    |
+    +--> ‘std::pair<_T1, _T2>::pair(const std::pair<_T1, _T2>&) [with _T1 = const Json::Value::CZString; _T2 = Json::Value]’: events 3-4
+           |
+           |/usr/include/c++/11/bits/stl_pair.h:314:17:
+           |  314 |       constexpr pair(const pair&) = default;    ///< Copy constructor
+           |      |                 ^~~~
+           |      |                 |
+           |      |                 (3) entry to ‘std::pair<const Json::Value::CZString, Json::Value>::pair’
+           |      |                 (4) calling ‘Json::Value::Value’ from ‘std::pair<const Json::Value::CZString, Json::Value>::pair’
+           |
+           +--> ‘Json::Value::Value(const Json::Value&)’: events 5-6
+                  |
+                  |/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_value.cpp:445:1:
+                  |  445 | Value::Value(const Value& other) {
+                  |      | ^~~~~
+                  |      | |
+                  |      | (5) entry to ‘Json::Value::Value’
+                  |  446 |   dupPayload(other);
+                  |      |   ~~~~~~~~~~~~~~~~~
+                  |      |             |
+                  |      |             (6) calling ‘Json::Value::dupPayload’ from ‘Json::Value::Value’
+                  |
+                  +--> ‘void Json::Value::dupPayload(const Json::Value&)’: events 7-12
+                         |
+                         | 1010 | void Value::dupPayload(const Value& other) {
+                         |      |      ^~~~~
+                         |      |      |
+                         |      |      (7) entry to ‘Json::Value::dupPayload’
+                         |......
+                         | 1013 |   switch (type()) {
+                         |      |   ~~~~~~
+                         |      |   |
+                         |      |   (8) following ‘case 4:’ branch...
+                         |......
+                         | 1021 |   case stringValue:
+                         |      |   ~~~~
+                         |      |   |
+                         |      |   (9) ...to here
+                         | 1022 |     if (other.value_.string_ && other.isAllocated()) {
+                         |      |     ~~
+                         |      |     |
+                         |      |     (10) following ‘true’ branch...
+                         |......
+                         | 1025 |       decodePrefixedString(other.isAllocated(), other.value_.string_, &len,
+                         |      |       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                         |      |                           |                                  |
+                         |      |                           |                                  (11) ...to here
+                         |      |                           (12) calling ‘Json::decodePrefixedString’ from ‘Json::Value::dupPayload’
+                         | 1026 |                            &str);
+                         |      |                            ~~~~~
+                         |
+                         +--> ‘void Json::decodePrefixedString(bool, const char*, unsigned int*, const char**)’: events 13-15
+                                |
+                                |  159 | inline static void decodePrefixedString(bool isPrefixed, char const* prefixed,
+                                |      |                    ^~~~~~~~~~~~~~~~~~~~
+                                |      |                    |
+                                |      |                    (13) entry to ‘Json::decodePrefixedString’
+                                |  160 |                                         unsigned* length, char const** value) {
+                                |  161 |   if (!isPrefixed) {
+                                |      |   ~~                
+                                |      |   |
+                                |      |   (14) following ‘true’ branch...
+                                |  162 |     *length = static_cast<unsigned>(strlen(prefixed));
+                                |      |                                     ~~~~~~~~~~~~~~~~
+                                |      |                                           |
+                                |      |                                           (15) ...to here
+                                |
+                         <------+
+                         |
+                       ‘void Json::Value::dupPayload(const Json::Value&)’: events 16-17
+                         |
+                         | 1025 |       decodePrefixedString(other.isAllocated(), other.value_.string_, &len,
+                         |      |       ~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                         |      |                           |
+                         |      |                           (16) returning to ‘Json::Value::dupPayload’ from ‘Json::decodePrefixedString’
+                         | 1026 |                            &str);
+                         |      |                            ~~~~~
+                         | 1027 |       value_.string_ = duplicateAndPrefixStringValue(str, len);
+                         |      |                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                         |      |                                                     |
+                         |      |                                                     (17) calling ‘Json::duplicateAndPrefixStringValue’ from ‘Json::Value::dupPayload’
+                         |
+                         +--> ‘char* Json::duplicateAndPrefixStringValue(const char*, unsigned int)’: event 18
+                                |
+                                |  139 | static inline char* duplicateAndPrefixStringValue(const char* value,
+                                |      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                |      |                     |
+                                |      |                     (18) entry to ‘Json::duplicateAndPrefixStringValue’
+                                |
+                              ‘char* Json::duplicateAndPrefixStringValue(const char*, unsigned int)’: event 19
+                                |
+                                |/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/assertions.h:56:5:
+                                |   56 |     if (!(condition)) {                                                        \
+                                |      |     ^~
+                                |      |     |
+                                |      |     (19) following ‘false’ branch (when ‘length <= 2147483642’)...
+/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_value.cpp:143:3: note: in expansion of macro ‘JSON_ASSERT_MESSAGE’
+                                |  143 |   JSON_ASSERT_MESSAGE(length <= static_cast<unsigned>(Value::maxInt) -
+                                |      |   ^~~~~~~~~~~~~~~~~~~
+                                |
+                              ‘char* Json::duplicateAndPrefixStringValue(const char*, unsigned int)’: events 20-24
+                                |
+                                |  147 |   size_t actualLength = sizeof(length) + length + 1;
+                                |      |                                          ^~~~~~
+                                |      |                                          |
+                                |      |                                          (20) ...to here
+                                |  148 |   auto newString = static_cast<char*>(malloc(actualLength));
+                                |      |                                       ~~~~~~~~~~~~~~~~~~~~
+                                |      |                                             |
+                                |      |                                             (21) allocated here
+                                |  149 |   if (newString == nullptr) {
+                                |      |   ~~                                      
+                                |      |   |
+                                |      |   (22) assuming ‘newString’ is non-NULL
+                                |      |   (23) following ‘false’ branch (when ‘newString’ is non-NULL)...
+                                |......
+                                |  153 |   *reinterpret_cast<unsigned*>(newString) = length;
+                                |      |   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                |      |                                           |
+                                |      |                                           (24) ...to here
+                                |
+                         <------+
+                         |
+                       ‘void Json::Value::dupPayload(const Json::Value&)’: events 25-26
+                         |
+                         |  147 |   size_t actualLength = sizeof(length) + length + 1;
+                         |      |                                          ~~~~~~      
+                         |      |                                          |
+                         |      |                                          (26) ‘Json::duplicateAndPrefixStringValue(str, len)’ leaks here; was allocated at (21)
+                         |......
+                         | 1027 |       value_.string_ = duplicateAndPrefixStringValue(str, len);
+                         |      |                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~
+                         |      |                                                     |
+                         |      |                                                     (25) returning to ‘Json::Value::dupPayload’ from ‘Json::duplicateAndPrefixStringValue’
+                         |
+/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_value.cpp:1035:54: warning: use of possibly-NULL ‘operator new(48)’ where non-null expected [CWE-690] [-Wanalyzer-possible-null-argument]
+ 1035 |     value_.map_ = new ObjectValues(*other.value_.map_);
+      |                                                      ^
+  ‘void __gnu_cxx::new_allocator<_Tp>::construct(_Up*, _Args&& ...) [with _Up = std::pair<const Json::Value::CZString, Json::Value>; _Args = {const std::pair<const Json::Value::CZString, Json::Value>&}; _Tp = std::_Rb_tree_node<std::pair<const Json::Value::CZString, Json::Value> >]’: events 1-2
+    |
+    |/usr/include/c++/11/ext/new_allocator.h:160:9:
+    |  160 |         construct(_Up* __p, _Args&&... __args)
+    |      |         ^~~~~~~~~
+    |      |         |
+    |      |         (1) entry to ‘__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<const Json::Value::CZString, Json::Value> > >::construct<std::pair<const Json::Value::CZString, Json::Value>, const std::pair<const Json::Value::CZString, Json::Value>&>’
+    |  161 |         noexcept(std::is_nothrow_constructible<_Up, _Args...>::value)
+    |  162 |         { ::new((void *)__p) _Up(std::forward<_Args>(__args)...); }
+    |      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    |      |           |
+    |      |           (2) calling ‘std::pair<const Json::Value::CZString, Json::Value>::pair’ from ‘__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<const Json::Value::CZString, Json::Value> > >::construct<std::pair<const Json::Value::CZString, Json::Value>, const std::pair<const Json::Value::CZString, Json::Value>&>’
+    |
+    +--> ‘std::pair<_T1, _T2>::pair(const std::pair<_T1, _T2>&) [with _T1 = const Json::Value::CZString; _T2 = Json::Value]’: events 3-4
+           |
+           |/usr/include/c++/11/bits/stl_pair.h:314:17:
+           |  314 |       constexpr pair(const pair&) = default;    ///< Copy constructor
+           |      |                 ^~~~
+           |      |                 |
+           |      |                 (3) entry to ‘std::pair<const Json::Value::CZString, Json::Value>::pair’
+           |      |                 (4) calling ‘Json::Value::Value’ from ‘std::pair<const Json::Value::CZString, Json::Value>::pair’
+           |
+           +--> ‘Json::Value::Value(const Json::Value&)’: events 5-6
+                  |
+                  |/home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_value.cpp:445:1:
+                  |  445 | Value::Value(const Value& other) {
+                  |      | ^~~~~
+                  |      | |
+                  |      | (5) entry to ‘Json::Value::Value’
+                  |  446 |   dupPayload(other);
+                  |      |   ~~~~~~~~~~~~~~~~~
+                  |      |             |
+                  |      |             (6) calling ‘Json::Value::dupPayload’ from ‘Json::Value::Value’
+                  |
+                  +--> ‘void Json::Value::dupPayload(const Json::Value&)’: events 7-11
+                         |
+                         | 1010 | void Value::dupPayload(const Value& other) {
+                         |      |      ^~~~~
+                         |      |      |
+                         |      |      (7) entry to ‘Json::Value::dupPayload’
+                         |......
+                         | 1013 |   switch (type()) {
+                         |      |   ~~~~~~
+                         |      |   |
+                         |      |   (8) following ‘case 5:’ branch...
+                         |......
+                         | 1033 |   case arrayValue:
+                         |      |   ~~~~
+                         |      |   |
+                         |      |   (9) ...to here
+                         | 1034 |   case objectValue:
+                         | 1035 |     value_.map_ = new ObjectValues(*other.value_.map_);
+                         |      |                                                      ~
+                         |      |                                                      |
+                         |      |                                                      (10) this call could return NULL
+                         |      |                                                      (11) argument 'this' (‘operator new(48)’) from (10) could be NULL where non-null expected
+                         |
+In file included from /usr/include/c++/11/map:61,
+                 from /home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/include/json/value.h:48,
+                 from /home/qcerris/Desktop/2024_Analysis_Yugioh/jsoncpp/src/lib_json/json_value.cpp:8:
+/usr/include/c++/11/bits/stl_map.h:207:7: note: argument 'this' of ‘std::map<_Key, _Tp, _Compare, _Alloc>::map(const std::map<_Key, _Tp, _Compare, _Alloc>&) [with _Key = Json::Value::CZString; _Tp = Json::Value; _Compare = std::less<Json::Value::CZString>; _Alloc = std::allocator<std::pair<const Json::Value::CZString, Json::Value> >]’ must be non-null
+  207 |       map(const map&) = default;
+      |       ^~~

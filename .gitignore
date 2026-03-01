@@ -22,3 +22,7 @@ compile_commands.json
 .DS_Store
 Thumbs.db
 
+# Python virtual environments and cache (for Lizard)
+venv/
+__pycache__/
+*.pyc

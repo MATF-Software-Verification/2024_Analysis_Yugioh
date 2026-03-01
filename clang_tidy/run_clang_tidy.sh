@@ -13,7 +13,6 @@ cd "$BUILD_DIR"
 cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON "$PROJECT_ROOT/jsoncpp" > /dev/null
 
 echo "=== Pokretanje Clang-Tidy analize ==="
-echo "Ovo moze potrajati jer se radi duboka staticka analiza..."
 
 clang-tidy "$JSONCPP_SRC"/*.cpp -p "$BUILD_DIR" \
     --extra-arg=-std=c++11 \

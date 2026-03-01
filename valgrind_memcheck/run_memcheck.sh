@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Putanje
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 PROJECT_ROOT=$(dirname "$SCRIPT_DIR")
 BUILD_DIR="$PROJECT_ROOT/unit_tests/build"
@@ -16,7 +15,8 @@ echo "=== Valgrind Memcheck Report: Original Unit Tests ===" > "$OUTPUT_FILE"
 echo "Generated on: $(date)" >> "$OUTPUT_FILE"
 
 echo "--- Running Valgrind on Original Unit Tests (jsoncpp_test) ---"
-valgrind --leak-check=full \
+valgrind --tool=memcheck \
+         --leak-check=full \
          --show-leak-kinds=all \
          --track-origins=yes \
          --log-file="/tmp/valgrind_tmp.txt" \
