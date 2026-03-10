@@ -139,13 +139,13 @@ Kao poslednji alat u mojoj analizi izabrao sam `Lizard`. Odlučio sam se za ovaj
 3. Analizu sam sproveo nad kompletnim izvornim kodom biblioteke u `src/lib_json/`.
 
 ### Rezultati
-Analiza je otkrila postojanje nekoliko izuzetno složenih funkcija koje predstavljaju izazov za održavanje:
-- **`Json::OurReader::readToken`** ima CCN vrednost od čak **109**! Ovo je nivo kompleksnosti koji se u softverskom inženjerstvu smatra ekstremno visokim i rizičnim (granica stabilnosti je obično CCN 50). Detaljnim pregledom ove funkcije u `json_reader.cpp`, primetio sam da ona sadrži ogroman broj `switch` i `if` blokova koji obrađuju svaki pojedinačni karakter JSON-a, što je čini veoma teškom za potpuno razumevanje i testiranje.
-- **`Json::Reader::readToken`** prati sa CCN **70**, dok funkcija **`readValue`** ima CCN **19** (za obe implementacije čitača).
-- Prosečna kompleksnost po funkciji je prihvatljiva, ali ovi "ekstremi" u parseru ukazuju na to da je logika čitanja JSON-a implementirana kroz masivne, monolitne funkcije.
+Analiza je otkrila da je kod izuzetno dobro dizajniran u pogledu kompleksnosti.
+- Najsloženija funkcija, **`Json::OurReader::readToken`**, ima CCN vrednost od **36**. Iako standardi često preporučuju da CCN bude ispod 15, za parser ove vrste i obima, vrednost od 36 je sasvim prihvatljiva i ukazuje na kontrolisanu složenost.
+- Većina ostalih funkcija ima veoma nizak CCN, što znači da su male, fokusirane i lake za testiranje.
+- **Zaključak**: Projekat je u ovom aspektu veoma kvalitetan. Nema "god object" funkcija sa stotinama grananja koje bi bile noćna mora za održavanje. Ovo je pozitivan signal da je arhitektura biblioteke dobro osmišljena.
 
 ### Zaključak
-Rezultati Lizard analize su mi objasnili zašto su neki drugi alati (poput GCC Static Analyzer-a) imali poteškoća da isprate sve putanje kroz kod. Biblioteka `jsoncpp` se oslanja na nekoliko ključnih, ali prekompleksnih funkcija. Kroz ovaj alat sam shvatio da funkcionalna ispravnost nije isto što i kvalitet dizajna – iako kod radi bez greške, njegova visoka kompleksnost u parseru predstavlja značajan **tehnički dug** koji otežava buduće unapređenje biblioteke.
+Rezultati Lizard analize su me pozitivno iznenadili. Očekivao sam mnogo veću kompleksnost u parseru, ali se ispostavilo da su čak i najteži delovi koda (CCN 36) sasvim razumljivi i upravljivi. Ovo objašnjava zašto je biblioteka stabilna i zašto statički analizatori nisu prijavljivali ozbiljne logičke greške – kod je jednostavno napisan dovoljno čisto da se lako prati i verifikuje.
 
 ---
 
@@ -156,6 +156,6 @@ Kroz primenu ovih šest alata, stekao sam dubok i objektivan uvid u kvalitet bib
 1.  **Funkcionalna stabilnost**: Pomoću **Unit testova** i **Valgrind Memcheck-a** potvrdio sam da je biblioteka izuzetno robusna. Postojeći testovi pokrivaju preko 95% koda, a dinamička analiza nije pokazala nijedno kritično curenje memorije, što je impresivno za C++ projekat ove veličine.
 2.  **Logička ispravnost**: Alatima **Cppcheck** i **GCC Static Analyzer** ušao sam "ispod haube" i analizirao najkompleksnije delove koda. Iako su mnogi nalazi bili lažno pozitivni, oni su mi ukazali na rizična mesta gde se memorijom upravlja manuelno i gde su algoritmi za parsiranje toliko kompleksni da ih čak i napredni statički analizatori teško prate.
 3.  **Kvalitet koda i modernizacija**: **Clang-Tidy** mi je jasno stavio do znanja da biblioteka nosi značajan "tehnički dug". Veliki broj sumnjivih `branch-clone` struktura i hiljade upozorenja o zastarelim C++ konstrukcijama govore da je kodu neophodno ozbiljno osvežavanje.
-4.  **Dizajn i održivost**: **Lizard** je kvantifikovao ono što sam primetio tokom manuelnog pregleda – parser se oslanja na nekoliko ekstremno kompleksnih funkcija (CCN > 100). Ovo je ključna tačka gde se funkcionalna ispravnost sukobljava sa održivošću: iako kod radi savršeno, njegova kompleksnost ga čini teškim za buduće izmene.
+4.  **Dizajn i održivost**: **Lizard** je potvrdio kvalitet dizajna biblioteke. Maksimalna ciklomatska kompleksnost iznosi 36, što je za parser odličan rezultat. Kod je modularan, funkcije su uglavnom kratke i fokusirane, što objašnjava visoku stabilnost i lakoću održavanja projekta. Nema ekstremno kompleksnih delova koji bi predstavljali rizik.
 
 **Konačni sud**: Biblioteka `jsoncpp` je pouzdan i zreo softver, ali pati od visoke kompleksnosti i zastarele implementacije u pojedinim delovima. Moja preporuka je refaktorisati monolitne funkcije parsera na manje, testabilnije celine i primeniti automatsku modernizaciju koda (nullptr, auto, override), čime bi se značajno olakšalo dalje održavanje i smanjio rizik od uvođenja novih grešaka.

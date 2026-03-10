@@ -14,7 +14,6 @@ echo "Analiziram fajlove u $JSONCPP_SRC..."
 # -fanalyzer: Ukljuci staticku analizu (dostupno od GCC 10+)
 # -std=c++11: Standard koji projekat koristi
 # -I: Putanja do headera
-# -Wno-psabi: Iskljuci dosadna upozorenja o ABI promenama (ako se pojave)
 
 rm -f "$OUTPUT_FILE"
 
