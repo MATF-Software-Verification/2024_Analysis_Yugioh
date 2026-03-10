@@ -142,7 +142,7 @@ Kao poslednji alat u mojoj analizi izabrao sam `Lizard`. Odlučio sam se za ovaj
 Analiza je otkrila da je kod izuzetno dobro dizajniran u pogledu kompleksnosti.
 - Najsloženija funkcija, **`Json::OurReader::readToken`**, ima CCN vrednost od **36**. Iako standardi često preporučuju da CCN bude ispod 15, za parser ove vrste i obima, vrednost od 36 je sasvim prihvatljiva i ukazuje na kontrolisanu složenost.
 - Većina ostalih funkcija ima veoma nizak CCN, što znači da su male, fokusirane i lake za testiranje.
-- **Zaključak**: Projekat je u ovom aspektu veoma kvalitetan. Nema "god object" funkcija sa stotinama grananja koje bi bile noćna mora za održavanje. Ovo je pozitivan signal da je arhitektura biblioteke dobro osmišljena.
+- **Zaključak**: Projekat je u ovom aspektu veoma kvalitetan.
 
 ### Zaključak
 Rezultati Lizard analize su me pozitivno iznenadili. Očekivao sam mnogo veću kompleksnost u parseru, ali se ispostavilo da su čak i najteži delovi koda (CCN 36) sasvim razumljivi i upravljivi. Ovo objašnjava zašto je biblioteka stabilna i zašto statički analizatori nisu prijavljivali ozbiljne logičke greške – kod je jednostavno napisan dovoljno čisto da se lako prati i verifikuje.
